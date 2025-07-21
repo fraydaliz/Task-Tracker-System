@@ -19,6 +19,7 @@
   "homepage": "https://github.com/fraydaliz/Task-Tracker-System#readme",
   "description": "",
   "dependencies": {
+    "cosr": "^5.0.0",
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
     "pg": "^8.16.3"
