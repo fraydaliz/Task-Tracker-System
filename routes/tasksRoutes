@@ -1,9 +1,0 @@
-import express from 'express'
-export const task = express.Router()
-
-import { getTasks, deleteTasks, postTasks, putTasks } from '../controller/tasksController.js'
-
-task.get('/tasks/' , getTasks )
-task.post('/tasks/', postTasks)
-task.delete('/task/:tasks_id', deleteTasks)
-task.put('/tasks/:tasks_id', putTasks)

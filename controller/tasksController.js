@@ -1,11 +1,32 @@
 import { pool } from "../db/cn.js";
 
 export const getTasks = async (req, res) => {
-  const sql = `select * from task_tracker.tasks`;
+  const sql = `select a.task_id,
+  a.employee_id,
+  b.name as employee_name,
+  a.role
+  from task_tracker.tasks a
+  inner join task_tracker.employee b on a.employee_id = b.employee_id`;
+  
   const result = await pool.query(sql);
-
   return res.json(result.rows);
 };
+
+export const getTasksPerEmployee = async (req, res) => {
+  const { employee_id } = req.params;
+
+  const sql = `select a.task_id,
+  a.employee_id,
+  b.name as employee_name
+  from task_tracker.tasks a
+  inner join task_tracker.employee b on a.employee_id = b.employee_id
+  where a.employee_id = $1`;
+  
+  const result = await pool.query(sql, [employee_id]);
+  return res.json(result.rows);
+};
+
+
 
 export const postTasks = async (req, res) => {
   const sql = `insert into task_tracker.tasks ( description, status, employee_id) values ($1, $2, $3)`;
@@ -23,7 +44,6 @@ export const deleteTasks = async (req, res) => {
   const result = await pool.query(sql, parameter);
   return res.json({ massage: "object deleted" });
 };
-
 
 export const putTasks = async (req, res) => {
   const sql = `update task_tracker.tasks
