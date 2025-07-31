@@ -35,5 +35,5 @@ if (enviroment === "production") {
 } else {
   app.listen(port, () => {
     console.log(`listening in port ${port}`);
-  });
+  })
 }
