@@ -23,10 +23,10 @@ app.use("/api", task);
 if (enviroment === "production") {
   const options = {
     key: fs.readFileSync(
-      "/etc/letsencrypt/live/ssl-fray-backend.codex-p4-2025.click/privkey.pem"
+      "/etc/letsencrypt/live/fray-backend.codex-p4-2025.click/privkey.pem"
     ),
     cert: fs.readFileSync(
-      "/etc/letsencrypt/live/ssl-fray-backend.codex-p4-2025.click/fullchain.pem"
+      "/etc/letsencrypt/live/fray-backend.codex-p4-2025.click/fullchain.pem"
     ),
   };
   https.createServer(options, app).listen(port, () => {
