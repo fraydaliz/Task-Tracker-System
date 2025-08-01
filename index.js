@@ -12,7 +12,7 @@ const enviroment = process.env.NODE_ENVIROMENT;
 const port = 3000;
 
 if (enviroment === "production") {
-  port = 443;
+ let port = 443;
 }
 
 app.use(express.json());
