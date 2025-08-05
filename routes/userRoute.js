@@ -5,3 +5,5 @@ import { postUser, auth} from '../controller/userController.js'
 
 user.post('/user', postUser)
 user.post('/user/auth', auth)
+
+
