@@ -18,6 +18,8 @@ export const getTasksPerEmployee = async (req, res) => {
   const sql = `select a.task_id,
   a.employee_id,
   b.name as employee_name
+  a.description,
+  a.status
   from task_tracker.tasks a
   inner join task_tracker.employee b on a.employee_id = b.employee_id
   where a.employee_id = $1`;
