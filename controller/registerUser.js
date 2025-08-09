@@ -3,7 +3,7 @@ import { pool } from '../db/cn.js'
 
 export const registerUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body
+    const { first_name, last_name, birth_date, email, password,  } = req.body
 
     if (!name || !email || !password) {
       return res.status(400).json({ message: 'Missing required fields' })
