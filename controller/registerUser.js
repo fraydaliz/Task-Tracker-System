@@ -12,8 +12,8 @@ export const registerUser = async (req, res) => {
   
 
  
-    const insertSql = `INSERT INTO task_tracker.users (name, email, password) VALUES ($1, $2, $3) RETURNING *`
-    const result = await pool.query(insertSql, [name, email, password]) 
+    const Sql = `INSERT INTO task_tracker.users (first_name, email, birth_date password) VALUES ($1, $2, $3) RETURNING *`
+    const result = await pool.query(Sql, [first_name, last_name, birth_date, email, password]) 
     res.status(201).json({ message: 'User registered', user: result.rows[0] })
   } catch (error) {
     console.error('Registration error:', error)
