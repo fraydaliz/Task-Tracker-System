@@ -17,7 +17,7 @@ export const getTasksPerEmployee = async (req, res) => {
 
   const sql = `select a.task_id,
   a.employee_id,
-  b.name as employee_name
+  b.name as employee_name,
   a.description,
   a.status
   from task_tracker.tasks a
@@ -35,7 +35,7 @@ export const postTasks = async (req, res) => {
   const body = req.body;
   const parameter = [body.description, body.status, body.employee_id];
   const result = await pool.query(sql, parameter);
-  return res.json({ massage: "object created" });
+  return res.json({ message: "object created" });
 };
 
 export const deleteTasks = async (req, res) => {
@@ -60,4 +60,30 @@ export const putTasks = async (req, res) => {
   const parameter = [body.description, body.status, body.employee_id, task_id];
   const result = await pool.query(sql, parameter);
   return res.json({ massage: "object updated" });
+};
+
+export const getTaskById = async (req, res) => {
+  const { task_id } = req.params;
+
+  const sql = `SELECT a.task_id,
+                      a.employee_id,
+                      b.name AS employee_name,
+                      a.description,
+                      a.status
+               FROM task_tracker.tasks a
+               INNER JOIN task_tracker.employee b ON a.employee_id = b.employee_id
+               WHERE a.task_id = $1`;
+
+  try {
+    const result = await pool.query(sql, [task_id]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+
+    return res.json(result.rows[0]);
+  } catch (err) {
+    console.error("Error fetching task by ID:", err);
+    return res.status(500).json({ message: "Internal server error" });
+  }
 };
