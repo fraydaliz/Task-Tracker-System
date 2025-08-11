@@ -9,3 +9,4 @@ task.get('/tasks/:employee_id' ,validateToken, getTasksPerEmployee )
 task.post('/tasks/',validateToken, postTasks)
 task.delete('/tasks/:task_id',validateToken, deleteTasks)
 task.put('/tasks/:task_id',validateToken, putTasks)
+task.get('/tasks/task/:task_id', validateToken, getTaskById);
